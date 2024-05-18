@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: companysearch
+logging:
+  level:
+    com.trunarrative.companysearch: DEBUG
