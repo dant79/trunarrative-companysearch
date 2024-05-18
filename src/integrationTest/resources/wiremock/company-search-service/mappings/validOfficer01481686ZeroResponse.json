@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/Officers?CompanyNumber=01481686"
+  },
+
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "kind": "officer-list",
+      "items_per_page": 35
+    }
+  }
+}
+
+
+

@@ -16,17 +16,18 @@ public class SearchCriteria {
         return companyName;
     }
 
-
-    public void setCompanyName(String companyName) {
+    public SearchCriteria setCompanyName(String companyName) {
         this.companyName = companyName;
+        return this;
     }
 
     public String getCompanyNumber() {
         return companyNumber;
     }
 
-    public void setCompanyNumber(String companyNumber) {
+    public SearchCriteria setCompanyNumber(String companyNumber) {
         this.companyNumber = companyNumber;
+        return this;
     }
 
     @Override

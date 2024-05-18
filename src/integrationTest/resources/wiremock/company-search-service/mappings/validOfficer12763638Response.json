@@ -1,0 +1,78 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/Officers?CompanyNumber=12763638"
+  },
+
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "etag": "5fa33feb2d42315e6b2a72e31ec4fe2e85f43035",
+      "inactive_count": 1,
+      "links": {
+        "self": "/company/12763638/officers"
+      },
+      "kind": "officer-list",
+      "items_per_page": 35,
+      "items": [
+        {
+          "address": {
+            "premises": "30",
+            "postal_code": "B20 1HJ",
+            "country": "England",
+            "locality": "Birmingham",
+            "address_line_1": "Chalcot Grove"
+          },
+          "name": "KAUR, Simran",
+          "appointed_on": "2020-08-04",
+          "officer_role": "director",
+          "links": {
+            "officer": {
+              "appointments": "/officers/HE5jQtVVkBj75kQb5loOpLtKswA/appointments"
+            }
+          },
+          "date_of_birth": {
+            "month": 2,
+            "year": 1996
+          },
+          "occupation": "Company Director",
+          "country_of_residence": "England",
+          "nationality": "British"
+        },
+        {
+          "address": {
+            "premises": "30",
+            "postal_code": "B20 1HJ",
+            "country": "England",
+            "locality": "Birmingham",
+            "address_line_1": "Chalcot Grove"
+          },
+          "name": "SINGH, Atinder",
+          "appointed_on": "2020-07-23",
+          "officer_role": "director",
+          "links": {
+            "officer": {
+              "appointments": "/officers/_X7FcYyT3zyUXfd42zCAB-35m_s/appointments"
+            }
+          },
+          "date_of_birth": {
+            "month": 11,
+            "year": 1990
+          },
+          "occupation": "Company Director",
+          "country_of_residence": "England",
+          "nationality": "Indian",
+          "resigned_on": "2020-08-04"
+        }
+      ],
+      "total_results": 2,
+      "resigned_count": 1
+    }
+  }
+}
+
+
+

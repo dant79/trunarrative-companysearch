@@ -1,0 +1,103 @@
+{
+  "totalResults": 4,
+  "items": [
+    {
+      "companyNumber": "06500244",
+      "companyType": "ltd",
+      "title": "BBC LIMITED",
+      "companyStatus": "active",
+      "dateOfCreation": "2008-02-11",
+      "address": {
+        "premises": "Boswell Cottage Main Street",
+        "locality": "Retford",
+        "country": "England",
+        "address_line_1": "North Leverton",
+        "postal_code": "DN22 0AD"
+      },
+      "officers": [
+        {
+          "name": "FORM 10 SECRETARIES FD LTD",
+          "officerRole": "corporate-nominee-secretary",
+          "appointedOn": "2008-02-11",
+          "address": {
+            "premises": null,
+            "locality": "Manchester",
+            "country": null,
+            "address_line_1": "39a Leicester Road",
+            "postal_code": "M7 4AS"
+          }
+        },
+        {
+          "name": "FORM 10 DIRECTORS FD LTD",
+          "officerRole": "corporate-nominee-director",
+          "appointedOn": "2008-02-11",
+          "address": {
+            "premises": null,
+            "locality": "Manchester",
+            "country": null,
+            "address_line_1": "39a Leicester Road",
+            "postal_code": "M7 4AS"
+          }
+        }
+      ]
+    },
+    {
+      "companyNumber": "12763638",
+      "companyType": "ltd",
+      "title": "BBC & GLAZING LTD",
+      "companyStatus": "dissolved",
+      "dateOfCreation": "2020-07-23",
+      "address": {
+        "premises": "30",
+        "locality": "Birmingham",
+        "country": "England",
+        "address_line_1": "Chalcot Grove",
+        "postal_code": "B20 1HJ"
+      },
+      "officers": [
+        {
+          "name": "SINGH, Atinder",
+          "officerRole": "director",
+          "appointedOn": "2020-07-23",
+          "address": {
+            "premises": "30",
+            "locality": "Birmingham",
+            "country": "England",
+            "address_line_1": "Chalcot Grove",
+            "postal_code": "B20 1HJ"
+          }
+        }
+      ]
+    },
+    {
+      "companyNumber": "01481686",
+      "companyType": "ltd",
+      "title": "B.B.C. BATHROOMS LIMITED",
+      "companyStatus": "liquidation",
+      "dateOfCreation": "1980-02-27",
+      "address": {
+        "premises": "602/604 ",
+        "locality": null,
+        "country": null,
+        "address_line_1": "Seven Sisters Road",
+        "postal_code": "N15 6HT"
+      },
+      "officers": []
+    },
+    {
+      "companyNumber": "13903907",
+      "companyType": "ltd",
+      "title": "BBC CONSERVATOIRE OF MUSIC & MATHEMATICS LTD",
+      "companyStatus": "active",
+      "dateOfCreation": "2022-02-09",
+      "address": {
+        "premises": "22",
+        "locality": "London",
+        "country": "United Kingdom",
+        "address_line_1": "Notting Hill Gate",
+        "postal_code": "W11 3JE"
+      },
+      "officers": []
+    }
+  ]
+}

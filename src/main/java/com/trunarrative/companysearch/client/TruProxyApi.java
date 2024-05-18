@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "trunarrative-api", url = "https://exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/",
+@FeignClient(value = "${trunarrative-api.name}", url = "${trunarrative-api.url}",
         configuration = FeignClientConfiguration.class)
 public interface TruProxyApi {
 

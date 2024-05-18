@@ -7,4 +7,4 @@ logging:
 
 trunarrative-api:
   name: trunarrative-api
-  url: https://exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/
+  url: http://localhost:8090/
