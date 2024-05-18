@@ -4,6 +4,7 @@ import com.trunarrative.companysearch.client.TruProxyApi;
 import com.trunarrative.companysearch.client.companysearch.CompanyList;
 import com.trunarrative.companysearch.client.companysearch.CompanyResult;
 import com.trunarrative.companysearch.client.officersearch.OfficerList;
+import com.trunarrative.companysearch.exception.CompanyNotFoundException;
 import com.trunarrative.companysearch.exception.InvalidRequestException;
 import com.trunarrative.companysearch.model.Company;
 import com.trunarrative.companysearch.model.Officer;
@@ -48,8 +49,8 @@ public class CompanySearchService {
 
         CompanyList companyList = truProxyApi.companySearch(apiKey, searchString(searchCriteria));
 
-        if(companyList == null || companyList.getCompanyResults() == null) {
-            return buildResults(null);
+        if(companyList == null || companyList.getCompanyResults() == null || companyList.getCompanyResults().isEmpty()) {
+            throw new CompanyNotFoundException("No company could be found with criteria: " + searchCriteria);
         }
 
         logger.debug("Company List:" + companyList);
@@ -77,10 +78,7 @@ public class CompanySearchService {
     }
 
     private boolean filterActiveOnly(CompanyResult companyResult, boolean activeOnly) {
-        if(activeOnly && !companyResult.getCompanyStatus().equals("active")) {
-            return false;
-        }
-        return true;
+        return !activeOnly || companyResult.getCompanyStatus().equals("active");
     }
 
     private Company mapCompany(CompanyResult companyResult, String apiKey) {

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/Search?Query=00000"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "page_number": 1,
+      "kind": "search#companies"
+    }
+  }
+}
+
+
+
+

@@ -1,5 +1,6 @@
 package com.trunarrative.companysearch.service;
 
+import com.trunarrative.companysearch.exception.CompanyNotFoundException;
 import com.trunarrative.companysearch.exception.InvalidRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CompanySearchExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = InvalidRequestException.class)
-    protected ResponseEntity<Object> handleConflict(
+    protected ResponseEntity<Object> handleInvalidRequest(
             InvalidRequestException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(),
                 new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY, request);
+    }
+    @ExceptionHandler(value = CompanyNotFoundException.class)
+    protected ResponseEntity<Object> handleCompanyNotFound(
+            CompanyNotFoundException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(),
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
 }

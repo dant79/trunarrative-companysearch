@@ -43,8 +43,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	integrationTestImplementation 'org.springframework.boot:spring-boot-starter-test'
+	integrationTestImplementation 'org.springframework.boot:spring-boot-starter-web'
 	integrationTestImplementation 'com.maciejwalkowiak.spring:wiremock-spring-boot:2.1.2'
 	integrationTestImplementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
+	integrationTestImplementation 'org.hamcrest:hamcrest-all:1.3'
 
 }
 
