@@ -1,9 +1,7 @@
 package com.trunarrative;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
 import com.maciejwalkowiak.wiremock.spring.ConfigureWireMock;
 import com.maciejwalkowiak.wiremock.spring.EnableWireMock;
-import com.maciejwalkowiak.wiremock.spring.InjectWireMock;
 import com.trunarrative.companysearch.CompanySearchApplication;
 import com.trunarrative.companysearch.model.SearchCriteria;
 import com.trunarrative.companysearch.model.SearchResults;
@@ -30,10 +28,7 @@ public class CompanyResultSearchIntTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CompanyResultSearchIntTest.class);
 
-    @InjectWireMock("company-search-service")
-    private WireMockServer wiremock;
-
-    private static final String apiKey = "testApiKey";
+    private static final String API_KEY = "testApiKey";
 
     @Autowired
     private CompanySearchService companySearchService;
@@ -46,10 +41,10 @@ public class CompanyResultSearchIntTest {
     void shouldReturnBBCResultsWhenSearchByCompanyNameBBC() throws IOException {
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyName("BBC LIMITED");
 
-        SearchResults results = companySearchService.searchCompanies(apiKey, false, searchCriteria);
+        SearchResults results = companySearchService.searchCompanies(API_KEY, false, searchCriteria);
         assertThat(results.getTotalResults()).isEqualTo(4);
 
-        LOGGER.error("Search Results: " + testUtils.toNormalisedJson(results));
+        LOGGER.info("Search Results: " + testUtils.toNormalisedJson(results));
 
         testUtils.assertJsonMatchesResource(results, "/response/companyNameSearchResponse.json");
     }
@@ -58,10 +53,10 @@ public class CompanyResultSearchIntTest {
     void shouldSearchByCompanyNumberWhenProvided() throws IOException {
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyNumber("06500244").setCompanyName("BBC LIMITED");
 
-        SearchResults results = companySearchService.searchCompanies(apiKey, false, searchCriteria);
+        SearchResults results = companySearchService.searchCompanies(API_KEY, false, searchCriteria);
         assertThat(results.getTotalResults()).isEqualTo(1);
 
-        LOGGER.error("Search Results: " + testUtils.toNormalisedJson(results));
+        LOGGER.info("Search Results: " + testUtils.toNormalisedJson(results));
 
         testUtils.assertJsonMatchesResource(results, "/response/companyNumberSearchResponse.json");
     }
@@ -70,22 +65,22 @@ public class CompanyResultSearchIntTest {
     void shouldOnlyReturnActiveCompaniesWhenActiveOnly() throws IOException {
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyName("BBC LIMITED");
 
-        SearchResults results = companySearchService.searchCompanies(apiKey, true, searchCriteria);
+        SearchResults results = companySearchService.searchCompanies(API_KEY, true, searchCriteria);
         assertThat(results.getTotalResults()).isEqualTo(2);
 
-        LOGGER.error("Search Results: " + testUtils.toNormalisedJson(results));
+        LOGGER.info("Search Results: " + testUtils.toNormalisedJson(results));
 
         testUtils.assertJsonMatchesResource(results, "/response/companyNameSearchActiveOnlyResponse.json");
     }
     @Test
-    void shouldOnlyReturnActiveOfficersWhenCompanyHas4InTotal() throws IOException {
+    void shouldOnlyReturn2ActiveOfficersWhenCompanyHas4InTotal() throws IOException {
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyNumber("06500244");
 
-        SearchResults results = companySearchService.searchCompanies(apiKey, false, searchCriteria);
+        SearchResults results = companySearchService.searchCompanies(API_KEY, false, searchCriteria);
         assertThat(results.getTotalResults()).isEqualTo(1);
         assertThat(results.getItems().get(0).getOfficers()).hasSize(2);
 
-        LOGGER.error("Search Results: " + testUtils.toNormalisedJson(results));
+        LOGGER.info("Search Results: " + testUtils.toNormalisedJson(results));
 
         testUtils.assertJsonMatchesResource(results, "/response/companyNumberSearchResponse.json");
     }

@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 public class CompanySearchService {
 
-    private final Logger logger = LoggerFactory.getLogger(CompanySearchService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CompanySearchService.class);
 
     private final TruProxyApi truProxyApi;
     private final CompanyTransformer companyTransformer;
@@ -36,6 +36,17 @@ public class CompanySearchService {
         this.officerTransformer = officerTransformer;
     }
 
+    /**
+     * Search for companies against the Trunarrative API, combining the company search results with the officers
+     * associated with each company. This could be better documented with the use of Open API annotations on the service
+     * and model classes.
+     * @param apiKey the api key for the Trunarrative API
+     * @param activeOnly True will filter out all non-active companies from the results
+     * @param searchCriteria specify the company name or number. Number will take priority if both are specified.
+     *                       Will return 422 if either is populated.
+     * @return List of companies matching the criteria. If no company is found when the number is specified the service
+     * will return 404.
+     */
     @PostMapping(path = "/companysearch", consumes = "application/json", produces = "application/json")
     public SearchResults searchCompanies(
             @RequestHeader(name = "x-api-key") String apiKey,
@@ -43,8 +54,8 @@ public class CompanySearchService {
             @RequestBody SearchCriteria searchCriteria
             ) {
 
-        logger.debug("Active Only: " + activeOnly);
-        logger.debug("SearchCriteria: " + searchCriteria);
+        LOGGER.debug("Active Only: " + activeOnly);
+        LOGGER.debug("SearchCriteria: " + searchCriteria);
 
         CompanyList companyList = truProxyApi.companySearch(apiKey, searchString(searchCriteria));
 
@@ -52,11 +63,11 @@ public class CompanySearchService {
             throw new CompanyNotFoundException("No company could be found with criteria: " + searchCriteria);
         }
 
-        logger.debug("Company List:" + companyList);
+        LOGGER.debug("Company List:" + companyList);
 
         List<Company> companies = companyList.getCompanyResults().stream()
                 .filter(companyResult -> filterActiveOnly(companyResult, activeOnly))
-                .map( companyResult -> mapCompany(companyResult, apiKey))
+                .map( companyResult -> mapCompanyAndFindOfficers(companyResult, apiKey))
                 .collect(Collectors.toList());
 
         return buildResults(companies);
@@ -80,7 +91,7 @@ public class CompanySearchService {
         return !activeOnly || companyResult.getCompanyStatus().equals("active");
     }
 
-    private Company mapCompany(CompanyResult companyResult, String apiKey) {
+    private Company mapCompanyAndFindOfficers(CompanyResult companyResult, String apiKey) {
         Company company = companyTransformer.map(companyResult);
         company.setOfficers(findOfficers(company.getCompanyNumber(), apiKey));
         return company;
@@ -93,7 +104,7 @@ public class CompanySearchService {
             return new ArrayList<>();
         }
 
-        logger.debug("Officer List:" + officerList);
+        LOGGER.debug("Officer List:" + officerList);
 
         return officerList.getOfficers().stream()
                 .filter(officerResult -> officerResult.getResignedOn() == null)

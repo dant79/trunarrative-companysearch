@@ -19,8 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 
-import static com.trunarrative.companysearch.TestCases.aCompanyResult;
-import static com.trunarrative.companysearch.TestCases.anOfficer;
+import static com.trunarrative.companysearch.TestData.aCompanyResult;
+import static com.trunarrative.companysearch.TestData.anOfficer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -30,10 +30,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class CompanySearchServiceTest {
 
-    private static final String apiHeaderKey = "x-api-key";
-    private static final String activeOnlyHeaderKey = "active-only";
-    private static final String apiKey = "testApiKey";
-    private static final String activeOnly = "false";
+    private static final String API_KEY = "testApiKey";
 
     @Mock
     private TruProxyApi truProxyApi;
@@ -51,18 +48,18 @@ public class CompanySearchServiceTest {
     public void shouldThrowCompanyNotFoundWhenEmpty() {
         CompanyList companyList = new CompanyList();
 
-        when(truProxyApi.companySearch(eq(apiKey), anyString())).thenReturn(companyList);
+        when(truProxyApi.companySearch(eq(API_KEY), anyString())).thenReturn(companyList);
 
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyNumber("000000");
 
-        assertThrows(CompanyNotFoundException.class, () -> companySearchService.searchCompanies(apiKey, false, searchCriteria));
+        assertThrows(CompanyNotFoundException.class, () -> companySearchService.searchCompanies(API_KEY, false, searchCriteria));
     }
 
     @Test
     public void shouldThrowInvalidRequestWhenCriteriaEmpty() {
         SearchCriteria searchCriteria = new SearchCriteria();
 
-        assertThrows(InvalidRequestException.class, () -> companySearchService.searchCompanies(apiKey, false, searchCriteria));
+        assertThrows(InvalidRequestException.class, () -> companySearchService.searchCompanies(API_KEY, false, searchCriteria));
     }
 
     @Test
@@ -76,10 +73,10 @@ public class CompanySearchServiceTest {
                         aCompanyResult("2", date)
                 ));
 
-        when(truProxyApi.companySearch(eq(apiKey), anyString())).thenReturn(companyList);
+        when(truProxyApi.companySearch(eq(API_KEY), anyString())).thenReturn(companyList);
 
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyNumber("000000");
-        SearchResults results = companySearchService.searchCompanies(apiKey, true, searchCriteria);
+        SearchResults results = companySearchService.searchCompanies(API_KEY, true, searchCriteria);
 
         assertThat(results.getItems()).hasSize(1);
     }
@@ -100,12 +97,12 @@ public class CompanySearchServiceTest {
                         anOfficer("2", date).setResignedOn(date)
                 ));
 
-        when(truProxyApi.companySearch(eq(apiKey), anyString())).thenReturn(companyList);
-        when(truProxyApi.officerSearch(eq(apiKey), anyString())).thenReturn(officerList);
+        when(truProxyApi.companySearch(eq(API_KEY), anyString())).thenReturn(companyList);
+        when(truProxyApi.officerSearch(eq(API_KEY), anyString())).thenReturn(officerList);
 
 
         SearchCriteria searchCriteria = new SearchCriteria().setCompanyNumber("000000");
-        SearchResults results = companySearchService.searchCompanies(apiKey, true, searchCriteria);
+        SearchResults results = companySearchService.searchCompanies(API_KEY, true, searchCriteria);
 
         assertThat(results.getItems()).hasSize(1);
         assertThat(results.getItems().get(0).getOfficers()).hasSize(1);

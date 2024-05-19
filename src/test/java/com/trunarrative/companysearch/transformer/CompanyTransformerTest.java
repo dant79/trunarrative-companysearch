@@ -1,16 +1,13 @@
 package com.trunarrative.companysearch.transformer;
 
 import com.trunarrative.companysearch.client.companysearch.CompanyResult;
-import com.trunarrative.companysearch.model.Address;
 import com.trunarrative.companysearch.model.Company;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.trunarrative.companysearch.TestCases.*;
+import static com.trunarrative.companysearch.TestData.*;
 
-import java.time.LocalDate;
 
 public class CompanyTransformerTest {
 
@@ -25,16 +22,16 @@ public class CompanyTransformerTest {
         CompanyResult companyResult = aCompanyResult("", date);
 
         Company company = companyTransformer.map(companyResult);
-        assertThat(company.getCompanyNumber()).isEqualTo("1");
-        assertThat(company.getCompanyStatus()).isEqualTo("active");
-        assertThat(company.getCompanyType()).isEqualTo("ltd");
+        assertThat(company.getCompanyNumber()).isEqualTo(COMPANY_NUMBER);
+        assertThat(company.getCompanyStatus()).isEqualTo(COMPANY_STATUS);
+        assertThat(company.getCompanyType()).isEqualTo(COMPANY_TYPE);
         assertThat(company.getDateOfCreation()).isEqualTo(date);
-        assertThat(company.getTitle()).isEqualTo("title");
-        assertThat(company.getAddress().getPremises()).isEqualTo("premises");
-        assertThat(company.getAddress().getAddressLine1()).isEqualTo("addressLine1");
-        assertThat(company.getAddress().getLocality()).isEqualTo("locality");
-        assertThat(company.getAddress().getPostcode()).isEqualTo("postcode");
-        assertThat(company.getAddress().getCountry()).isEqualTo("country");
+        assertThat(company.getTitle()).isEqualTo(COMPANY_TITLE);
+        assertThat(company.getAddress().getPremises()).isEqualTo(ADDRESS_PREMISES);
+        assertThat(company.getAddress().getAddressLine1()).isEqualTo(ADDRESS_LINE_1);
+        assertThat(company.getAddress().getLocality()).isEqualTo(ADDRESS_LOCALITY);
+        assertThat(company.getAddress().getPostcode()).isEqualTo(ADDRESS_POSTCODE);
+        assertThat(company.getAddress().getCountry()).isEqualTo(ADDRESS_COUNTRY);
 
     }
 }

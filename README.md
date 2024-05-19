@@ -25,3 +25,10 @@ and a parameter of active-only will need to be set to true or false depending wh
 ```
 http://localhost:8080/companysearch?active-only=true
 ```
+
+To test error conditions the spring profile 'local' has been set to return a 500 error from the Trunarrative API.
+To run with this profile 
+
+```
+./gradlew bootRun --args='--spring.profiles.active=local'
+```

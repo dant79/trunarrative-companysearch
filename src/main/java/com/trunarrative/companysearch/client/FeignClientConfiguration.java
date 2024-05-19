@@ -1,7 +1,7 @@
 package com.trunarrative.companysearch.client;
 
 import feign.Logger;
-import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
+import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,4 +13,8 @@ public class FeignClientConfiguration {
         return Logger.Level.FULL;
     }
 
+    @Bean
+    public ErrorDecoder errorDecoder() {
+        return new TruErrorDecoder();
+    }
 }
