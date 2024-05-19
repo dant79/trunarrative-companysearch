@@ -16,3 +16,12 @@ To start the spring boot application run
 ```
 ./gradlew bootRun
 ``` 
+
+To use the service you will need to make a post request to the following endpoint. 
+The api key will need to be set in a header of x-api-key 
+and a parameter of active-only will need to be set to true or false depending whether you wish to see only active companies.
+
+
+```
+http://localhost:8080/companysearch?active-only=true
+```
