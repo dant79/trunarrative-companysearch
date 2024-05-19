@@ -43,7 +43,6 @@ public class CompanySearchService {
             @RequestBody SearchCriteria searchCriteria
             ) {
 
-        logger.debug("API Key: " + apiKey);
         logger.debug("Active Only: " + activeOnly);
         logger.debug("SearchCriteria: " + searchCriteria);
 
@@ -97,7 +96,7 @@ public class CompanySearchService {
         logger.debug("Officer List:" + officerList);
 
         return officerList.getOfficers().stream()
-                .filter(officerResult -> officerResult.getResignedOn() != null)
+                .filter(officerResult -> officerResult.getResignedOn() == null)
                 .map(officerTransformer::map)
                 .collect(Collectors.toList());
     }

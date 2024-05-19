@@ -77,6 +77,18 @@ public class CompanyResultSearchIntTest {
 
         testUtils.assertJsonMatchesResource(results, "/response/companyNameSearchActiveOnlyResponse.json");
     }
+    @Test
+    void shouldOnlyReturnActiveOfficersWhenCompanyHas4InTotal() throws IOException {
+        SearchCriteria searchCriteria = new SearchCriteria().setCompanyNumber("06500244");
+
+        SearchResults results = companySearchService.searchCompanies(apiKey, false, searchCriteria);
+        assertThat(results.getTotalResults()).isEqualTo(1);
+        assertThat(results.getItems().get(0).getOfficers()).hasSize(2);
+
+        LOGGER.error("Search Results: " + testUtils.toNormalisedJson(results));
+
+        testUtils.assertJsonMatchesResource(results, "/response/companyNumberSearchResponse.json");
+    }
 
 
 }
